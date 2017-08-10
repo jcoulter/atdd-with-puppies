@@ -17,7 +17,7 @@ Feature: As a dog lover
     Given I am on the home page
     When I click on the first puppy
     And I click on "Adopt Me!"
-    Then I the puppy is in my litter
+    Then I see the puppy is in my litter
 
   Scenario: Be able to change my mind about adopting a puppy
     Given I have added a puppy to my litter

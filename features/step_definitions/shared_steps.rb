@@ -11,9 +11,15 @@ Then(/^I see "([^"]*)"$/) do |expected_text|
 end
 
 And(/^I click on "([^"]*)"$/) do |caption|
-  @browser.link(text: caption).click
+  element = @browser.links(text: caption)[0]
+  element = @browser.buttons(text: caption)[0] unless element.exist?
+  element.click
 end
 
 Then(/^I see the home page$/) do
   expect(@browser.url).to eq 'http://localhost:3000/'
+end
+
+Then(/^I see the puppy is in my litter$/) do
+  pending
 end
