@@ -27,14 +27,14 @@ Feature: As a dog lover
   Scenario: Be able to add another puppy to my litter
     Given I have added a puppy to my litter
     When I click on "Adopt Another Puppy"
-    And I click on the second puppy
+    And I click on the puppy "Hanna"
     And I click on "Adopt Me!"
-    Then I see the second puppy in my litter
+    Then I see the puppy "Hanna" is in my litter
 
   Scenario: Be able to change my mind removes all puppies from my litter
     Given I have added a puppy to my litter
     And I click on "Adopt Another Puppy"
-    And I click on the second puppy
+    And I click on the puppy "Hanna"
     And I click on "Adopt Me!"
     When I click on "Change your mind"
     Then I see the home page
@@ -42,33 +42,33 @@ Feature: As a dog lover
 
   Scenario: Add accessories to a puppy and the price change is reflected
     Given I have added a puppy to my litter
-    When I add a Collar & Leash to my order
-    And I add a Chew Toy to my order
+    When I add a "Collar & Leash" to my order
+    And I add a "Chew Toy" to my order
     Then I see "$92.91"
 
   Scenario: Be able to fill in adoption info
     Given I have added a puppy to my litter
-    When I tap "Complete the Adoption"
+    When I click on "Complete the Adoption"
     Then I see "Please Enter Your Details"
 
   Scenario: Complete an adoption
     Given I have added a puppy to my litter
-    When I tap "Complete the Adoption"
+    When I click on "Complete the Adoption"
     And I fill the form in with the following values:
       | element        | value           |
       | order_name     | Joe Sixpack     |
       | order_address  | 123 Main St.    |
       | order_email    | joe@sixpack.com |
       | order_pay_type | Check           |
-    And I click "Place Order"
+    And I click on "Place Order"
     Then I see "Thank you for adopting a puppy!"
 
   Scenario Outline: All fields are required to complete an adoption
     Given I have added a puppy to my litter
-    When I tap "Complete the Adoption"
+    When I click on "Complete the Adoption"
     And everything is filled in
-    And I yet leave <element> blank
-    And I click "Place Order"
+    And I leave <element> blank
+    And I click on "Place Order"
     Then I see "<error>"
 
     Examples:

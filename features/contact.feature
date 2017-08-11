@@ -4,12 +4,12 @@ Feature: As a user of the site
 
   Scenario: Get to the contact form
     Given I am on the home page
-    When I tap on the email icon
+    When I click on the email icon
     Then I see "Contact"
 
   Scenario: Submit a question
     Given I am on the home page
-    When I tap on the email icon
+    When I click on the email icon
     And I fill the form in with the following values:
       | element               | value                                              |
       | contact_message_name  | Joe Sixpack                                        |
