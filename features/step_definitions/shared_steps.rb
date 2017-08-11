@@ -41,17 +41,41 @@ When(/^I add a "([^"]*)" to my order$/) do |accessory|
 end
 
 
+def set_field(selector, value)
+
+  if @browser.text_field(selector).exists?
+    @browser.text_field(selector).set(value)
+  elsif @browser.textarea(selector).exists?
+    @browser.textarea(selector).set(value)
+  else
+    @browser.select_list(selector).select_value(value)
+  end
+end
+
 And(/^I fill the form in with the following values:$/) do |table|
   table.hashes.each do |data|
-    selector = {id: data["element"]}
-    value = data["value"]
-
-    if @browser.text_field(selector).exists?
-      @browser.text_field(selector).set(value)
-    elsif @browser.textarea(selector).exists?
-      @browser.textarea(selector).set(value)
-    else
-      @browser.select_list(selector).select_value(value)
-    end
+    selector = {id: data['element']}
+    value = data['value']
+    set_field(selector, value)
   end
+end
+
+And(/^everything is filled in$/) do
+  steps %Q{
+   And I fill the form in with the following values:
+      | element        | value           |
+      | order_name     | Joe Sixpack     |
+      | order_address  | 123 Main St.    |
+      | order_email    | joe@sixpack.com |
+      | order_pay_type | Check           |
+  }
+end
+
+And(/^I leave (.*) blank$/) do |element|
+  set_field({id:element}, '')
+end
+
+When(/^I click on the email icon$/) do
+  @browser.link(name: "Contact").click
+
 end
