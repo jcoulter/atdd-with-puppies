@@ -20,6 +20,14 @@ Then(/^I see the home page$/) do
   expect(@browser.url).to eq 'http://localhost:3000/'
 end
 
-Then(/^I see the puppy is in my litter$/) do
+Then(/^I see the first puppy is in my litter$/) do
   pending
+end
+
+When(/^I click on the puppy "([^"]*)"$/) do |name|
+  @browser.div(text: name).parent.button.click
+end
+
+Then(/^I see the puppy "([^"]*)" is in my litter$/) do |name|
+  expect(@browser.h2(text: "#{name}:").exist?).to be true
 end

@@ -1,5 +1,6 @@
 require 'rspec'
 require 'watir'
+require 'byebug'
 
 
 Before do |scenario|
